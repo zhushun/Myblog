@@ -7,7 +7,7 @@ title: 我的第网页
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>小球撞壁</title>
+    <title># {{ page.title }}</title>
     <style>
         *{
             padding:0;

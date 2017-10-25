@@ -2,12 +2,12 @@
 title: 我的第二个网页
 ---
 
-# {{ page.title }}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>小球撞壁</title>
+    <title># {{ page.title }}</title>
     <style>
         *{
             padding:0;
