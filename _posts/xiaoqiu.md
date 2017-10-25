@@ -1,3 +1,8 @@
+---
+title: 我的第网页
+---
+
+# {{ page.title }}
 <!DOCTYPE html>
 <html lang="en">
 <head>
