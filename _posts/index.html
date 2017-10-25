@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>小球撞壁</title>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+        }
+        .cbox{
+            position: absolute;
+            left:0;
+            top:0;
+            width:80px;
+            height:80px;
+            -webkit-border-radius:50%;
+            -moz-border-radius:50%;
+            border-radius:50%;
+            background-color: #000;
+        }
+    </style>
+</head>
+<body id="body">
+<div id="box"></div>
+</body>
+<script>
+    var Box=document.getElementById('box');
+    //开始创建标签节点并添加到Box中
+    for(var i=0;i<6;i++){
+        var oDiv=document.createElement('div');
+        oDiv.className="cbox";
+        oDiv.add=(i+1)*2;
+        oDiv.Hbool=true;
+        oDiv.Wbool=true;
+        Box.appendChild(oDiv);
+    }
+    //结束创建标签节点并添加到Box中
+    var aDiv=Box.children;
+    var Length=aDiv.length;
+    var stop=0;
+    var sleft=0;
+    var arr=[0,1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F'];
+    setInterval(function () {
+        for(var i=0;i<Length;i++){
+            var width=parseFloat(getstyle(aDiv[i],"width"));
+            var height=parseFloat(getstyle(aDiv[i],"height"));
+            var color='#';
+            var Top=aDiv[i].offsetTop;
+            var Left=aDiv[i].offsetLeft;
+            var vWidth=document.documentElement.clientWidth;
+            var vHeight=document.documentElement.clientHeight;
+            //开始随机生成颜色代码
+            for(var j=0;j<6;j++){
+                color+=arr[ Math.floor(Math.random()*16)];
+            }
+            //结束随机生成颜色代码
+
+            //开始控制小球运动及撞壁反弹的代码
+            if(aDiv[i].Hbool){
+                stop=aDiv[i].add+Top;
+                if((stop+height)>=vHeight){
+                    aDiv[i].Hbool=false;
+                    stop=vHeight-height;
+                    aDiv[i].style.backgroundColor=color;
+                }
+            }else{
+                stop=Top-aDiv[i].add;
+                if(stop<=0){
+                    aDiv[i].Hbool=true;
+                    stop=0;
+                    aDiv[i].style.backgroundColor=color;
+                }
+            }
+            if(aDiv[i].Wbool){
+                sleft=aDiv[i].add+Left;
+                if((sleft+height)>=vWidth){
+                    aDiv[i].Wbool=false;
+                    sleft=vWidth-height;
+                    aDiv[i].style.backgroundColor=color;
+                }
+            }else{
+                sleft=Left-aDiv[i].add;
+                if(sleft<=0){
+                    aDiv[i].Wbool=true;
+                    sleft=0;
+                    aDiv[i].style.backgroundColor=color;
+                }
+            }
+            //结束控制小球运动及撞壁反弹的代码
+            aDiv[i].style.top=stop+"px";
+            aDiv[i].style.left=sleft+"px";
+        }
+    },1000/60);
+    function getstyle(obj,attr){
+        return obj.currentStyle?obj.currentStyle[attr]:getComputedStyle(obj)[attr];
+    }
+</script>
+</html>
